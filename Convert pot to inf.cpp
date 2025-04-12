@@ -25,22 +25,22 @@ int Priority(char c)
 }
 
 
-string  InfixToPostfix(string infix)
+string  PostfixToInfix(string Postfix)
 {
     stack <char> stk;
     string output = "";
 
-    for (int i = 0; i < infix.length(); i++)
+    for (int i = 0; i < Postfix.length(); i++)
     {
-        if (isspace(infix[i]))  continue;
+        if (isspace(Postfix[i]))  continue;
 
-        if (isdigit(infix[i]) || isalpha(infix[i]))
-            output += infix[i];
+        if (isdigit(Postfix[i]) || isalpha(Postfix[i]))
+            output += Postfix[i];
         
-        else if (infix[i] == '(')
+        else if (Postfix[i] == '(')
             stk.push('(');
         
-        else if (infix[i] == ')')
+        else if (Postfix[i] == ')')
         {
             while (stk.top() != '(' )
             {
@@ -52,12 +52,12 @@ string  InfixToPostfix(string infix)
         }
         else
         {
-            while (!stk.empty() &&  Priority(infix[i]) <= Priority(stk.top()))
+            while (!stk.empty() &&  Priority(Postfix[i]) <= Priority(stk.top()))
             {
                 output += stk.top();
                 stk.pop();
             }
-            stk.push(infix[i]);
+            stk.push(Postfix[i]);
         }
 
     }
@@ -73,9 +73,9 @@ string  InfixToPostfix(string infix)
 
 int main(void)
 {
-    string infix = "(3+2)+7/2*((7+3)*2)";
+    string postfix = "(3+2)+7/2*((7+3)*2)";
 
-    cout << "Infix : " << InfixToPostfix(infix) << endl;
+    cout << "Postfix : " << PostfixToInfix(postfix) << endl;
 
 
     return (0);
